@@ -3,10 +3,6 @@
 		"target": "ESNext",
 		"module": "commonjs",
 		"moduleResolution": "node",
-		// "dist": [
-		// 	"es2015"
-		// ],
-
 		"rootDir": "server",
 		"outDir": "dist",
 
