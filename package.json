@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky",
-    "eslint": "eslint",
+    "eslint": "npm run lint",
     "build": "tsc",
     "start": "npm rm dist && npm run build && node dist/index.js",
-    "lint": "tslint -c tslint.json src/**/*.ts",
+    "lint": "tslint -c tslint.json server/**/*.ts",
     "prepublish": "npm run build"
   },
   "author": "",
