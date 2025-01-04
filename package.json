@@ -4,9 +4,7 @@
   "description": "��#\u0000 \u0000G\u0000a\u0000m\u0000b\u0000a\u0000r\u0000e\u0000 \u0000v\u0000o\u0000l\u0000 \u00002\u0000\r\u0000 \u0000",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky",
-    "eslint": "npm run lint",
     "build": "tsc",
     "start": "npm rm dist && npm run build && node dist/index.js",
     "lint": "tslint -c tslint.json server/**/*.ts",
