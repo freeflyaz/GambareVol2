@@ -1,3 +1,9 @@
 {
-  "extends": "tslint:latest"
+  "extends": "tslint:latest",
+  "rules": {
+    "no-console": {
+      "options": ["log", "error"],
+      "severity": "warning"
+    }
+  }  
 }
