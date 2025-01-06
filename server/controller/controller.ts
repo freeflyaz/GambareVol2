@@ -38,6 +38,21 @@ async function getAllTodos (_: express.Request, res: express.Response) {
     res.status(500).send({ msg: "server error in getAllTodos"})
   }
 }
+async function getTodo (req: express.Request, res: express.Response) {
+  const {id} = req.params;
+  const converted = Number(id);
+  try {
+    const theTodo = await prisma.todo.findUnique({where: {id: converted}});
+    if (theTodo) {
+      res.status(200).send({msg: `the todo with title: '${theTodo.title}' was successfully fetched`});
+    } else {
+      res.status(400).send({ msg: "user error in getTodo"});
+    }
+  } catch (error) {
+    console.log("error in getTodo", error);
+    res.status(500).send({ msg: "server error in getTodo"});
+  }
+}
 async function deleteTodo (req: express.Request, res: express.Response) {
   const {id} = req.params;
   const converted = Number(id);
@@ -59,5 +74,6 @@ async function deleteTodo (req: express.Request, res: express.Response) {
 export default {
   addTodo,
   getAllTodos,
+  getTodo,
   deleteTodo
 }
