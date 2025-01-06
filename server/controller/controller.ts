@@ -6,6 +6,10 @@ async function addTodo(req: express.Request, res: express.Response) {
   const {title, details} = req.body;
   try {
     let newTodo;
+    if (!title || title.trim() === "") {
+      res.status(400).send({msg: "the title cannot be an empty string"});
+      return;
+    }
     if (title && details) {
       newTodo = await prisma.todo.create({
        data : { title, details }
@@ -21,7 +25,10 @@ async function addTodo(req: express.Request, res: express.Response) {
       res.status(400).send({ msg: "user error in createTodo"})
     }
   } catch (error) {
-    console.log("error in createTodo", error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      res.status(404).send({ msg: "Todo not found" });
+      return;
+    }
     res.status(500).send({ msg: "server error in createTodo"})
   }
 }
@@ -34,7 +41,10 @@ async function getAllTodos (_: express.Request, res: express.Response) {
       res.status(400).send({ msg: "user error in getAllTodos"})
     }
   } catch (error) {
-    console.log("error in getAllTodos", error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      res.status(404).send({ msg: "Todo not found" });
+      return;
+    }
     res.status(500).send({ msg: "server error in getAllTodos"})
   }
 }
@@ -42,14 +52,23 @@ async function getTodo (req: express.Request, res: express.Response) {
   const {id} = req.params;
   const converted = Number(id);
   try {
+    if (Number.isNaN(converted)) {
+      res.status(400).send({msg: "the id must be a number"});
+      return;
+    }
     const theTodo = await prisma.todo.findUnique({where: {id: converted}});
     if (theTodo) {
       res.status(200).send({msg: `the todo with title: '${theTodo.title}' was successfully fetched`});
+      return;
     } else {
       res.status(400).send({ msg: "user error in getTodo"});
+      return;
     }
   } catch (error) {
-    console.log("error in getTodo", error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      res.status(404).send({ msg: "Todo not found" });
+      return;
+    }
     res.status(500).send({ msg: "server error in getTodo"});
   }
 }
@@ -57,16 +76,18 @@ async function deleteTodo (req: express.Request, res: express.Response) {
   const {id} = req.params;
   const converted = Number(id);
   try {
-    if (id) {
-      const deleted = await prisma.todo.delete({ where: {id: converted} });
-      if (deleted) res.status(200).send({msg: "successfully deleted a todo"});
-      else res.status(400).send({msg: "incorrect todo id"});
-    } else {
-      res.status(400).send({msg: "incorrect todo id"});
+    if (Number.isNaN(converted)) {
+      res.status(400).send({msg: "the id must be a number"});
+      return;
     }
-
+    const deleted = await prisma.todo.delete({ where: {id: converted} });
+    if (deleted) res.status(200).send({msg: "successfully deleted a todo"});
+    else res.status(400).send({msg: "incorrect todo id"});
   } catch (error) {
-    console.log("server error in deleteTodo", error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      res.status(404).send({ msg: "Todo not found" });
+      return;
+    }
     res.status(500).send({ msg: "server error in deleteTodo"});
   }
 }
@@ -79,7 +100,10 @@ async function deleteAllTodos (_: express.Request, res: express.Response) {
       res.status(400).send({ msg: "user error in deleteAllTodos"})
     }
   } catch (error) {
-    console.log("error in deleteAllTodos", error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      res.status(404).send({ msg: "Todo not found" });
+      return;
+    }
     res.status(500).send({ msg: "server error in deleteAllTodos"})
   }
 }
