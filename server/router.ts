@@ -10,6 +10,7 @@ router.get("/getAllTodos", Todo.getAllTodos);
 router.get("/getTodo/:id", Todo.getTodo);
 router.delete("/deleteTodo/:id", Todo.deleteTodo);
 router.delete("/deleteAll", Todo.deleteAllTodos);
+router.put("/updateTitle/:id", Todo.updateTitleTodo);
 // lvl2: mark all todos as completed
 
 export default router;

@@ -3,7 +3,7 @@ import express from 'express';
 const prisma = new PrismaClient()
 
 async function addTodo(req: express.Request, res: express.Response) {
-  const {title, details } = req.body;
+  const {title, details} = req.body;
   try {
     let newTodo;
     if (title && details) {
@@ -83,11 +83,28 @@ async function deleteAllTodos (_: express.Request, res: express.Response) {
     res.status(500).send({ msg: "server error in deleteAllTodos"})
   }
 }
+async function updateTitleTodo(req: express.Request, res: express.Response) {
+  const {id} = req.params;
+  const {title} = req.body;
+  const converted = Number(id);
+  try {
+    if (!id) res.status(400).send({msg: "the todo id is incorrect"});
+    if (title === "") res.status(400).send({msg: "the title cannot be an empty string"});
+    const updated = await prisma.todo.update({ where: {id: converted}, data: {title}});
+    if (updated) {
+     res.status(200).send({msg: `title of todo with an id:${Number(id)} updated to: "${updated.title}"`})
+    }
+  } catch (error) {
+    console.log("error in updateTitleTodo", error);
+    res.status(500).send({ msg: "server error in updateTitleTodo"})
+  }
+}
 
 export default {
   addTodo,
   getAllTodos,
   getTodo,
   deleteTodo,
-  deleteAllTodos
+  deleteAllTodos,
+  updateTitleTodo,
 }
