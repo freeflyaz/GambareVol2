@@ -6,6 +6,7 @@ import Todo from "./controller/controller";
 // free-tier & purged every 24 hours
 // lvl 1: create todo, update todo, show todos, show completed todos, clear all todos,
 router.post("/addTodo", Todo.addTodo);
+router.get("/getAllTodos", Todo.getAllTodos);
 // lvl2: mark all todos as completed
 
 export default router;
