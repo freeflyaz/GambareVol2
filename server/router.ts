@@ -9,6 +9,7 @@ router.post("/addTodo", Todo.addTodo);
 router.get("/getAllTodos", Todo.getAllTodos);
 router.get("/getTodo/:id", Todo.getTodo);
 router.delete("/deleteTodo/:id", Todo.deleteTodo);
+router.delete("/deleteAll", Todo.deleteAllTodos);
 // lvl2: mark all todos as completed
 
 export default router;

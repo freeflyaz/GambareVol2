@@ -70,10 +70,24 @@ async function deleteTodo (req: express.Request, res: express.Response) {
     res.status(500).send({ msg: "server error in deleteTodo"});
   }
 }
+async function deleteAllTodos (_: express.Request, res: express.Response) {
+  try {
+    const allTodos = await prisma.todo.deleteMany();
+    if (allTodos) {
+      res.status(200).send({msg: "all todos successfully deleted"})
+    } else {
+      res.status(400).send({ msg: "user error in deleteAllTodos"})
+    }
+  } catch (error) {
+    console.log("error in deleteAllTodos", error);
+    res.status(500).send({ msg: "server error in deleteAllTodos"})
+  }
+}
 
 export default {
   addTodo,
   getAllTodos,
   getTodo,
-  deleteTodo
+  deleteTodo,
+  deleteAllTodos
 }
