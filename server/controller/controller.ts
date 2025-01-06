@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import express from 'express';
 const prisma = new PrismaClient()
 
-async function createTodo(req: express.Request, res: express.Response) {
+async function addTodo(req: express.Request, res: express.Response) {
   const {title, details } = req.body;
   try {
     let newTodo;
@@ -27,5 +27,5 @@ async function createTodo(req: express.Request, res: express.Response) {
 }
 
 export default {
-  createTodo
+  addTodo
 }
