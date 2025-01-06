@@ -7,6 +7,7 @@ import Todo from "./controller/controller";
 // lvl 1: create todo, update todo, show todos, show completed todos, clear all todos,
 router.post("/addTodo", Todo.addTodo);
 router.get("/getAllTodos", Todo.getAllTodos);
+router.delete("/deleteTodo/:id", Todo.deleteTodo);
 // lvl2: mark all todos as completed
 
 export default router;
