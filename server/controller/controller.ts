@@ -135,6 +135,34 @@ async function updateTitleTodo(req: express.Request, res: express.Response): Pro
   }
 }
 
+async function updateDetailsTodo(req: express.Request, res: express.Response): Promise<void> {
+  const {id} = req.params;
+  const {details} = req.body;
+  const converted = Number(id);
+  try {
+    if (!id) {
+      res.status(400).send({msg: "the todo id is incorrect"});
+      return;
+   }
+    if (Number.isNaN(converted)) {
+      res.status(400).send({msg: "The todo ID must be a number"});
+      return;
+    }
+    if (!details || details.trim() === "") {
+      res.status(400).send({msg: "the details cannot be an empty string"});
+      return;
+    }
+    const updated = await prisma.todo.update({ where: {id: converted}, data: {details}});
+    res.status(200).send({msg: `title of todo with an id:${converted} updated to: "${updated.details}"`})
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      res.status(404).send({ msg: "Todo not found" });
+      return;
+    }
+    res.status(500).send({ msg: "server error in updateDetailsTodo"})
+  }
+}
+
 export default {
   addTodo,
   getAllTodos,
@@ -142,4 +170,5 @@ export default {
   deleteTodo,
   deleteAllTodos,
   updateTitleTodo,
+  updateDetailsTodo
 }
