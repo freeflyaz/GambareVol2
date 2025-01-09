@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent {label 'ts-backend-01'}
     environment {
         NODE_ENV = 'production'
     }
