@@ -1,8 +1,8 @@
 pipeline {
     agent {label 'ts-backend-01'}
-    environment {
-        NODE_ENV = 'production'
-    }
+    // environment {
+    //     NODE_ENV = 'production'
+    // }
     stages {
         stage('Checkout Code') {
             steps {
