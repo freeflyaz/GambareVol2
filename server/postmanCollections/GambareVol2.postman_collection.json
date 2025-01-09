@@ -81,33 +81,6 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					"// pm.variables.set(\"title\", \"Learn about Postman pre-request scripting\");\r",
-					"// pm.variables.set(\"details\", \"Simple, single API pre-request scripting\");\r",
-					"\r",
-					"\r",
-					"//     pm.sendRequest({\r",
-					"//         url: 'http://localhost:8000/addTodo',\r",
-					"//         method: 'POST',\r",
-					"//         header: {\r",
-					"//             'Content-Type': 'application/json'\r",
-					"//         },\r",
-					"//         body: {\r",
-					"//             mode: 'raw',\r",
-					"//             raw: JSON.stringify({\r",
-					"//                 title: \"Learn about Postman pre-request scripting\",\r",
-					"//                 details: \"Simple, single API pre-request scripting\"\r",
-					"//             })\r",
-					"//         }\r",
-					"//     }, function (err, res) {\r",
-					"//         if (err) {\r",
-					"//             console.log('Error:', err);\r",
-					"//         } else {\r",
-					"//             console.log('Response:', res.json());\r",
-					"//         }\r",
-					"\r",
-					"     \r",
-					"//     });\r",
-					"\r",
 					""
 				]
 			}
@@ -116,34 +89,8 @@
 			"listen": "test",
 			"script": {
 				"type": "text/javascript",
-				"packages": {},
 				"exec": [
-					"pm.variables.set(\"title\", \"Learn about Postman pre-request scripting\");\r",
-					"pm.variables.set(\"details\", \"Simple, single API pre-request scripting\");\r",
-					"\r",
-					"\r",
-					"pm.sendRequest({\r",
-					"    url: 'http://localhost:8000/addTodo',\r",
-					"    method: 'POST',\r",
-					"    header: {\r",
-					"        'Content-Type': 'application/json'\r",
-					"    },\r",
-					"    body: {\r",
-					"        mode: 'raw',\r",
-					"        raw: JSON.stringify({\r",
-					"            title: \"Learn about Postman pre-request scripting\",\r",
-					"            details: \"Simple, single API pre-request scripting\"\r",
-					"        })\r",
-					"    }\r",
-					"}, function (err, res) {\r",
-					"    if (err) {\r",
-					"        console.log('Error:', err);\r",
-					"    } else {\r",
-					"        console.log('Response:', res.json());\r",
-					"    }\r",
-					"\r",
-					"    \r",
-					"});"
+					""
 				]
 			}
 		}
