@@ -20,7 +20,7 @@ async function addTodo(req: express.Request, res: express.Response) {
       })
     }
     if (newTodo) {
-      res.status(200).send({msg: "new todo successfully created"})
+      res.status(200).send({msg: "new todo successfully created", data: newTodo})
     } else {
       res.status(400).send({ msg: "user error in createTodo"})
     }
