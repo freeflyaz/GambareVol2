@@ -3,6 +3,9 @@ pipeline {
     // environment {
     //     NODE_ENV = 'production'
     // }
+    tools {
+        nodejs 'NodeJS-18-LTS-Newman'
+    }
     stages {
         stage('Checkout Code') {
             steps {
@@ -12,6 +15,11 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
+            }
+        }
+        stage('Run Newman Tests') {
+            steps {
+                sh 'newman run server\postmanCollections\GambareVol2.postman_collection.json'
             }
         }
         stage('Run Prisma Migrations') {
