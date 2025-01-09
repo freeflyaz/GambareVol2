@@ -8,7 +8,7 @@ pipeline {
     //     NODE_ENV = 'production'
     // }
     tools {
-        nodejs 'NodeJS-18-LTS-Newman'
+        nodejs 'NodeJS-Newman'
     }
     stages {
         stage('Checkout Code') {
