@@ -4,9 +4,6 @@ pipeline {
         label 'ts-backend-01'
     }
 }
-    // environment {
-    //     NODE_ENV = 'production'
-    // }
     tools {
         nodejs 'NodeJS-Newman'
     }
@@ -23,7 +20,7 @@ pipeline {
         }
         stage('Run Newman Tests') {
             steps {
-                sh 'newman run server\postmanCollections\GambareVol2.postman_collection.json'
+                sh 'newman run server/postmanCollections/GambareVol2.postman_collection.json'
             }
         }
         stage('Run Prisma Migrations') {
