@@ -1,7 +1,7 @@
 pipeline {
-    agent {
+  agent {
     node {
-        label 'ts-backend-01'
+      label 'ts-backend-01'
     }
 }
     tools {
