@@ -1,7 +1,7 @@
 pipeline {
   agent {
     node {
-      label 'ts-backend-01'
+      label 'ts_backend_01'
     }
   }
   tools {
@@ -40,8 +40,7 @@ pipeline {
     }
     stage('Start Server') {
       steps {
-        sh 'npm rm dist && npm run build && node dist/index.js'
-      }
+
     }
   }
   post {
@@ -50,3 +49,5 @@ pipeline {
     }
   }
 }
+}
+
